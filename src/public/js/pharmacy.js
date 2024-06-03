@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pharmacyContainer = document.getElementById("pharmacyContainer");
 
       pharmacies.forEach((pharmacy) => {
+        const openTonight = pharmacy.openTonight ? "Open" : "Closed";
         const card = `
                       <section class="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">
                           <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -15,8 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                                   <div class="min-w-[15rem]">
                                       <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" loading="lazy" alt="What is SaaS? Software as a Service Explained" class="w-full h-48 rounded-t-md" />
                                       <div class="flex items-center pt-3 ml-4 mr-2"></div>
-                                      <div class="pt-3 ml-4 mr-2 mb-3">
+                                      <div class="pt-3 ml-4 mr-2 mb-3 flex flex-col">
                                           <h3 class="text-sm font-bold text-gray-900">${pharmacy.name}</h3>
+                                          <h3 class="text-sm font-bold text-gray-900">${openTonight}</h3>
                                       </div>
                                       <div class="flex justify-between m-[1rem]">
                                           <style>
