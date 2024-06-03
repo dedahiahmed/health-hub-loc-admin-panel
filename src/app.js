@@ -25,15 +25,11 @@ app.get("/", (req, res) => {
     path.join(__dirname, "/components/sidebar.ejs"),
     "utf8"
   );
-  const cardContent = fs.readFileSync(
-    path.join(__dirname, "/components/card.ejs"),
-    "utf8"
-  );
+
   res.render("index", {
     title: "Home",
     navbar: navbarContent,
     sidebar: sidebarContent,
-    card: cardContent,
   });
 });
 
