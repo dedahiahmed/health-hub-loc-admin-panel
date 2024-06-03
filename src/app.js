@@ -12,20 +12,9 @@ app.set("views", path.join(__dirname, "views"));
 
 // Serve static files from the "public" directory
 app.use("/public", express.static(path.join(__dirname, "public")));
-
-app.get("/login", (req, res) => {
-  // Read the content of the login component file
-  const loginContent = fs.readFileSync(
-    path.join(__dirname, "/components/login.ejs"),
-    "utf8"
-  );
-
-  // Render the "login" view, passing the login content as data
-  res.render("login", {
-    title: "Login",
-    login: loginContent,
-  });
-});
+const loginRoute = require("./routes/login");
+// Use the login route
+app.use("/login", loginRoute);
 // Your existing routes and middleware
 app.get("/", (req, res) => {
   const navbarContent = fs.readFileSync(
