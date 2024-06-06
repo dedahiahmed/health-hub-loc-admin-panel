@@ -16,9 +16,9 @@
           <!-- Include Navbar -->
           <%- include('../components/navbar'); %>
 
-          <div class="content p-4 flex justify-center">
+          <div class="content p-4">
             <div
-              class="content p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
               id="pharmacyContainer"
             >
               <!-- Cards will be dynamically added here -->
@@ -27,6 +27,12 @@
         </div>
       </div>
     </div>
+
+    <div
+      id="paginationContainer"
+      class="fixed bottom-5 right-5 z-50 flex items-center space-x-2 bg-white rounded-md shadow-md p-2"
+    ></div>
+
     <script src="../public/js/pharmacy.js"></script>
   </body>
 </html>

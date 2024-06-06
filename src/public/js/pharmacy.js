@@ -1,56 +1,103 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("http://localhost:8080/api/health/pharmacies");
-
     if (response.ok) {
       const pharmacies = await response.json();
       const pharmacyContainer = document.getElementById("pharmacyContainer");
+      const itemsPerPage = 8;
+      let currentPage = 1;
 
-      pharmacies.forEach((pharmacy) => {
-        const openTonight = pharmacy.openTonight ? "Open" : "Closed";
-        const card = `
-                      <section class="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">
-                          <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                              <!-- Card Component -->
-                              <article class="max-w-md mx-auto mt-4 shadow-lg border rounded-md">
-                                  <div class="min-w-[15rem]">
-                                      <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" loading="lazy" alt="What is SaaS? Software as a Service Explained" class="w-full h-48 rounded-t-md" />
-                                      <div class="flex items-center pt-3 ml-4 mr-2"></div>
-                                      <div class="pt-3 ml-4 mr-2 mb-3 flex flex-col">
-                                          <h3 class="text-sm font-bold text-gray-900">${pharmacy.name}</h3>
-                                          <h3 class="text-sm font-bold text-gray-900">${openTonight}</h3>
-                                      </div>
-                                      <div class="flex justify-between m-[1rem]">
-                                          <style>
-                                              .icon-btn img {
-                                                  width: 16px;
-                                                  height: 16px;
-                                                  transition: width 0.3s, height 0.3s;
-                                              }
-                                              .icon-btn:hover img {
-                                                  width: 20px;
-                                                  height: 20px;
-                                              }
-                                          </style>
-                                          <div>
-                                              <button class="text-blue-400 icon-btn">
-                                                  <img src="../public/assets/icons/pencil.svg" />
-                                              </button>
-                                              <button class="text-red-500 icon-btn">
-                                                  <img src="../public/assets/icons/delete.svg" />
-                                              </button>
-                                          </div>
-                                          <div>
-                                              <a href="https://www.google.com/maps/dir/?api=1&destination=${pharmacy.longitude},${pharmacy.latitude}" target="_blank" class="underline text-blue-400">voir map</a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </article>
-                          </div>
-                      </section>
-                  `;
-        pharmacyContainer.innerHTML += card;
-      });
+      const displayPharmacies = (page) => {
+        pharmacyContainer.innerHTML = "";
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const displayedPharmacies = pharmacies.slice(startIndex, endIndex);
+
+        displayedPharmacies.forEach((pharmacy) => {
+          const openTonight = pharmacy.openTonight ? "Open" : "Closed";
+          const card = `
+              <article class="max-w-md mx-auto mt-12 shadow-lg border rounded-md bg-white">
+                <div class="min-w-[15rem]">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/health-hub-loc-828d4.appspot.com/o/pharmacy-sign-uk-D9C3RR.jpg?alt=media&token=1ff94864-b3a3-48ef-9b43-0e2e74c14834" loading="lazy" alt="Pharmacy" class="w-full h-48 rounded-t-md" />
+                  <div class="pt-3 ml-4 mr-2 mb-3 flex flex-col">
+                    <h3 class="text-sm font-bold text-gray-900">${
+                      pharmacy.name
+                    }</h3>
+                    <h3 class="text-sm font-bold ${
+                      openTonight === "Open" ? "text-green-600" : "text-red-600"
+                    }">${openTonight}</h3>
+                  </div>
+                  <div class="flex justify-between m-[1rem]">
+                    <div>
+                      <button class="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+                        <img src="../public/assets/icons/pencil.svg" alt="Edit" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
+                      </button>
+                      <button class="text-red-500 hover:text-red-700 transition-colors duration-300">
+                        <img src="../public/assets/icons/delete.svg" alt="Delete" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
+                      </button>
+                    </div>
+                    <div>
+                      <a href="https://www.google.com/maps/dir/?api=1&destination=${
+                        pharmacy.longitude
+                      },${
+            pharmacy.latitude
+          }" target="_blank" class="text-blue-400 hover:text-blue-600 underline transition-colors duration-300">voir map</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            `;
+          pharmacyContainer.innerHTML += card;
+        });
+      };
+
+      const totalItems = pharmacies.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const paginationContainer = document.getElementById(
+        "paginationContainer"
+      );
+
+      const updatePaginationUI = () => {
+        paginationContainer.innerHTML = `
+            <button id="prevBtn" class="text-gray-500 hover:text-blue-600 focus:outline-none ${
+              currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+            }">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <span class="text-sm text-gray-700">${currentPage} / ${totalPages}</span>
+            <button id="nextBtn" class="text-gray-500 hover:text-blue-600 focus:outline-none ${
+              currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""
+            }">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          `;
+
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            displayPharmacies(currentPage);
+            updatePaginationUI();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            displayPharmacies(currentPage);
+            updatePaginationUI();
+          }
+        });
+      };
+
+      displayPharmacies(currentPage);
+      updatePaginationUI();
     } else {
       console.error("Failed to fetch pharmacies:", await response.json());
     }

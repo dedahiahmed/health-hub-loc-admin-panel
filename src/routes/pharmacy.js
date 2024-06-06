@@ -11,13 +11,13 @@ const readComponent = (filePath) => {
   );
 };
 
-router.get("/", (req, res) => {
+router.get("/pharmacy", (req, res) => {
   try {
     // Read components
     const navbar = readComponent("Navbar.ejs");
     const sidebar = readComponent("Sidebar.ejs");
 
-    res.render("index", { title: "Home", navbar, sidebar });
+    res.render("pharmacy", { title: "Pharmacy", navbar, sidebar });
   } catch (error) {
     console.error("Error reading components:", error);
     res.status(500).send("Internal Server Error");

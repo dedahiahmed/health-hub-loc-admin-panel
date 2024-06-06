@@ -12,11 +12,18 @@ app.set("views", path.join(__dirname, "views"));
 
 // Serve static files from the "public" directory
 app.use("/public", express.static(path.join(__dirname, "public")));
+
 const loginRoute = require("./routes/login");
 // Use the login route
 app.use("/login", loginRoute);
-// Your existing routes and middleware
+
+// Route for "/" to redirect to "/pharmacy"
 app.get("/", (req, res) => {
+  res.redirect("/pharmacy");
+});
+
+// Route for "/pharmacy"
+app.get("/pharmacy", (req, res) => {
   const navbarContent = fs.readFileSync(
     path.join(__dirname, "/components/navbar.ejs"),
     "utf8"
@@ -26,8 +33,8 @@ app.get("/", (req, res) => {
     "utf8"
   );
 
-  res.render("index", {
-    title: "Home",
+  res.render("pharmacy", {
+    title: "Pharmacy",
     navbar: navbarContent,
     sidebar: sidebarContent,
   });
