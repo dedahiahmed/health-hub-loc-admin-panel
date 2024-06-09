@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
-const ejs = require("ejs"); // Import EJS module
+const ejs = require("ejs");
 const app = express();
 
 // Set EJS as the view engine
@@ -14,30 +13,17 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 const loginRoute = require("./routes/login");
+const pharmacyRoute = require("./routes/pharmacy");
+
 // Use the login route
 app.use("/login", loginRoute);
+
+// Use the pharmacy route
+app.use("/pharmacy", pharmacyRoute);
 
 // Route for "/" to redirect to "/pharmacy"
 app.get("/", (req, res) => {
   res.redirect("/pharmacy");
-});
-
-// Route for "/pharmacy"
-app.get("/pharmacy", (req, res) => {
-  const navbarContent = fs.readFileSync(
-    path.join(__dirname, "/components/navbar.ejs"),
-    "utf8"
-  );
-  const sidebarContent = fs.readFileSync(
-    path.join(__dirname, "/components/sidebar.ejs"),
-    "utf8"
-  );
-
-  res.render("pharmacy", {
-    title: "Pharmacy",
-    navbar: navbarContent,
-    sidebar: sidebarContent,
-  });
 });
 
 const port = process.env.PORT || 3000;

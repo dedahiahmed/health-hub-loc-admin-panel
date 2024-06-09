@@ -11,7 +11,7 @@ const readComponent = (filePath) => {
   );
 };
 
-router.get("/pharmacy", (req, res) => {
+router.get("/", (req, res) => {
   try {
     // Read components
     const navbar = readComponent("Navbar.ejs");
