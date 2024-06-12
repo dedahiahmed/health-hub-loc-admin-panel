@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         displayedPharmacies.forEach((pharmacy) => {
           const openTonight = pharmacy.openTonight ? "Open" : "Closed";
           const card = `
-              <article class="max-w-md mx-auto mt-12 shadow-lg border rounded-md bg-white">
+              <article class="max-w-md mx-auto  shadow-lg border rounded-md mt-12 bg-white">
                 <div class="min-w-[15rem]">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/health-hub-loc-828d4.appspot.com/o/pharmacy-sign-uk-D9C3RR.jpg?alt=media&token=1ff94864-b3a3-48ef-9b43-0e2e74c14834" loading="lazy" alt="Pharmacy" class="w-full h-48 rounded-t-md" />
+                  <img src="/public/images/shop.svg" loading="lazy" alt="Pharmacy" class="w-full h-48 rounded-t-md" />
                   <div class="pt-3 ml-4 mr-2 mb-3 flex flex-col">
                     <h3 class="text-sm font-bold text-gray-900">${
                       pharmacy.name
