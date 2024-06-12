@@ -24,4 +24,8 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get("/new-pharmacy", (req, res) => {
+  res.render("new-pharmacy", { title: "New Pharmacy" });
+});
+
 module.exports = router;

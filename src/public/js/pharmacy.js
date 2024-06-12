@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           const card = `
               <article class="max-w-md mx-auto  shadow-lg border rounded-md mt-12 bg-white">
                 <div class="min-w-[15rem]">
-                  <img src="/public/images/shop.svg" loading="lazy" alt="Pharmacy" class="w-full h-48 rounded-t-md" />
+                  <img src="../public/images/image.png" loading="lazy" alt="Pharmacy" class="w-full h-48 rounded-t-md" />
                   <div class="pt-3 ml-4 mr-2 mb-3 flex flex-col">
                     <h3 class="text-sm font-bold text-gray-900">${
                       pharmacy.name
