@@ -29,7 +29,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                   </div>
                   <div class="flex justify-between m-[1rem]">
                     <div>
-                      <button class="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+                      <button class="text-blue-400 hover:text-blue-600 transition-colors duration-300 pencilBtn" data-pharmacy-id="${
+                        pharmacy.id
+                      }">
                         <img src="../public/assets/icons/pencil.svg" alt="Edit" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
                       </button>
                       <button class="text-red-500 hover:text-red-700 transition-colors duration-300 deleteBtn" data-pharmacy-id="${
@@ -98,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Add event listeners for delete buttons
+        // Add event listeners for delete buttons
         const deleteBtns = document.querySelectorAll(".deleteBtn");
         deleteBtns.forEach((btn) => {
           btn.addEventListener("click", async () => {
@@ -117,7 +120,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                   // If deletion is successful, refresh the page
                   location.reload();
                 } else {
-                  alter(await deleteResponse.json());
                   console.error(
                     "Failed to delete pharmacy:",
                     await deleteResponse.json()
@@ -126,6 +128,32 @@ document.addEventListener("DOMContentLoaded", async () => {
               } catch (error) {
                 console.error("Error deleting pharmacy:", error);
               }
+            }
+          });
+        });
+        const pencilBtns = document.querySelectorAll(".pencilBtn");
+        pencilBtns.forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const pharmacyId = btn.dataset.pharmacyId;
+            try {
+              const response = await fetch(
+                `http://localhost:8080/api/health/pharmacies/${pharmacyId}`
+              );
+              if (response.ok) {
+                const pharmacyData = await response.json();
+                // Redirect to the "new-pharmacy.ejs" page with prefilled data
+                const queryString = Object.keys(pharmacyData)
+                  .map((key) => key + "=" + pharmacyData[key])
+                  .join("&");
+                window.location.href = `/pharmacy/update-pharmacy?${queryString}`;
+              } else {
+                console.error(
+                  "Failed to fetch pharmacy details:",
+                  response.status
+                );
+              }
+            } catch (error) {
+              console.error("Error fetching pharmacy details:", error);
             }
           });
         });

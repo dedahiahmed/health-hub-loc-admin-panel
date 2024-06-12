@@ -27,5 +27,7 @@ router.get("/", (req, res) => {
 router.get("/new-pharmacy", (req, res) => {
   res.render("new-pharmacy", { title: "New Pharmacy" });
 });
-
+router.get("/update-pharmacy", (req, res) => {
+  res.render("update-pharmacy", { title: "Update Pharmacy" });
+});
 module.exports = router;
