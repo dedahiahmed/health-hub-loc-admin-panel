@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                       <button class="text-blue-400 hover:text-blue-600 transition-colors duration-300">
                         <img src="../public/assets/icons/pencil.svg" alt="Edit" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
                       </button>
-                      <button class="text-red-500 hover:text-red-700 transition-colors duration-300">
+                      <button class="text-red-500 hover:text-red-700 transition-colors duration-300 deleteBtn" data-pharmacy-id="${
+                        pharmacy.id
+                      }">
                         <img src="../public/assets/icons/delete.svg" alt="Delete" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
                       </button>
                     </div>
@@ -93,6 +95,39 @@ document.addEventListener("DOMContentLoaded", async () => {
             displayPharmacies(currentPage);
             updatePaginationUI();
           }
+        });
+
+        // Add event listeners for delete buttons
+        const deleteBtns = document.querySelectorAll(".deleteBtn");
+        deleteBtns.forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const pharmacyId = btn.dataset.pharmacyId;
+            const confirmDelete = window.confirm(
+              "Are you sure you want to delete this pharmacy?"
+            );
+            if (confirmDelete) {
+              try {
+                const deleteResponse = await fetch(
+                  `http://localhost:8080/api/health/pharmacies/${pharmacyId}`,
+                  {
+                    method: "DELETE",
+                  }
+                );
+                if (deleteResponse.ok) {
+                  // If deletion is successful, refresh the page
+                  location.reload();
+                } else {
+                  alter(await deleteResponse.json());
+                  console.error(
+                    "Failed to delete pharmacy:",
+                    await deleteResponse.json()
+                  );
+                }
+              } catch (error) {
+                console.error("Error deleting pharmacy:", error);
+              }
+            }
+          });
         });
       };
 
