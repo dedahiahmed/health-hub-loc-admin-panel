@@ -14,12 +14,15 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 const loginRoute = require("./routes/login");
 const pharmacyRoute = require("./routes/pharmacy");
+const cabinetRoute = require("./routes/cabinet"); // Require the cabinet routes
 
 // Use the login route
 app.use("/login", loginRoute);
 
 // Use the pharmacy route
 app.use("/pharmacy", pharmacyRoute);
+// Use the pharmacy route
+app.use("/cabinet", cabinetRoute); 
 
 // Route for "/" to redirect to "/pharmacy"
 app.get("/", (req, res) => {
