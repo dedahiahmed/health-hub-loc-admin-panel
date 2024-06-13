@@ -70,9 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <img src="../public/assets/icons/delete.svg" alt="Delete" class="w-4 h-4 hover:w-5 hover:h-5 transition-all duration-300" />
                       </button>
                     </div>
-                    <div>
-                      <a href="https://www.google.com/maps/dir/?api=1&destination=${cabinet.latitude},${cabinet.longitude}" target="_blank" class="text-blue-400 hover:text-blue-600 underline transition-colors duration-300">voir map</a>
-                    </div>
+                
                   </div>
                 </div>
               </article>
