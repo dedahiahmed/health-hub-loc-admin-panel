@@ -694,6 +694,10 @@ video {
   margin-top: 3rem;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -706,16 +710,16 @@ video {
   margin-top: 2rem;
 }
 
-.mt-\[3rem\] {
-  margin-top: 3rem;
+.mt-\[2rem\] {
+  margin-top: 2rem;
 }
 
 .mt-\[4rem\] {
   margin-top: 4rem;
 }
 
-.mt-\[2rem\] {
-  margin-top: 2rem;
+.mt-\[\] {
+  margin-top: ;
 }
 
 .block {
@@ -903,6 +907,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {

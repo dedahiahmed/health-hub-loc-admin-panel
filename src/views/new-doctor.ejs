@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link href="../public/css/tailwind-output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+      <div class="relative flex flex-col md:flex-row">
+        <!-- Include Sidebar -->
+        <%- include('../components/sidebar'); %>
+
+        <div class="ml-0 md:ml-64 flex flex-col w-full">
+          <!-- Include Navbar -->
+          <%- include('../components/navbar'); %>
+
+          <div
+            class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 "
+          >
+            <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+              <div
+                class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10"
+              >
+                <div class="max-w-md mx-auto">
+                  <div class="flex items-center space-x-5">
+                    <div
+                      class="h-14 w-14 bg-[#73b4a6] rounded-full flex flex-shrink-0 justify-center items-center text-black text-2xl font-mono "
+                    >
+                      D
+                    </div>
+                    <div
+                      class="block pl-2 font-semibold text-xl self-start text-gray-700"
+                    >
+                      <h2 class="leading-relaxed">Create a Doctor</h2>
+                    </div>
+                  </div>
+                  <form id="doctorForm">
+                    <div
+                      class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 "
+                    >
+                      <div class="flex flex-col">
+                        <label class="leading-loose">Name</label>
+                        <input
+                        required
+                        type="text"
+                        name="name"
+                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Doctor's name"
+                      />
+                      </div>
+                      <div class="flex flex-col">
+                        <label class="leading-loose">Speciality</label>
+                        <input
+                          required
+                          type="text"
+                          name="speciality"
+                          class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                          placeholder="Speciality"
+                        />
+                      </div>
+                      <div class="flex flex-col">
+                        <label class="leading-loose">Schedule</label>
+                        <div class="flex flex-col space-y-2">
+                          <div>
+                            <label class="leading-loose">Monday</label>
+                            <input
+                              required
+                              type="text"
+                              name="schedule[Monday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 5:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Tuesday</label>
+                            <input
+                              required
+                              type="text"
+                              name="schedule[Tuesday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 5:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Wednesday</label>
+                            <input
+                              required
+                              type="text"
+                              name="schedule[Wednesday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 5:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Thursday</label>
+                            <input
+                              required
+                              type="text"
+                              name="schedule[Thursday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 5:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Friday</label>
+                            <input
+                              required
+                              type="text"
+                              name="schedule[Friday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 1:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Saturday</label>
+                            <input
+                              type="text"
+                              name="schedule[Saturday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 1:00 PM"
+                            />
+                          </div>
+                          <div>
+                            <label class="leading-loose">Sunday</label>
+                            <input
+                              type="text"
+                              name="schedule[Sunday]"
+                              class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder="e.g., 9:00 AM - 1:00 PM"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex flex-col">
+                        <label class="leading-loose">Cabinet</label>
+                        <select
+                          required
+                          name="cabinet[id]"
+                          id="cabinetSelect"
+                          class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        >
+                          <option value="">Select a cabinet</option>
+                          <!-- Dynamic options will be added here -->
+                        </select>
+                      </div>
+                    <div class="pt-4 flex items-center space-x-4">
+                        <button
+                        type="submit"
+                        class="bg-[#73b4a6] flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                    
+                      >
+                        Create
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../public/js/new-doctor.js"></script>
+  </body>
+</html>
