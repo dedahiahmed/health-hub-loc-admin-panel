@@ -28,8 +28,8 @@ router.get("/new-doctor", (req, res) => {
   res.render("new-doctor", { title: "New doctor" });
 });
 
-// router.get("/update-doctor", (req, res) => {
-//   res.render("update-doctor", { title: "Update doctor" });
-// });
+router.get("/update-doctor", (req, res) => {
+  res.render("update-doctor", { title: "Update doctor" });
+});
 
 module.exports = router;
