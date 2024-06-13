@@ -20,4 +20,45 @@ document.addEventListener("DOMContentLoaded", () => {
   latitudeInput.value = urlParams.get("latitude") || "";
   longitudeInput.value = urlParams.get("longitude") || "";
   isOpenTonightSelect.value = urlParams.get("isOpenTonight") || "";
+
+  // Add event listener to the update button
+  const updateButton = document.querySelector("#updateButton");
+  updateButton.addEventListener("click", async () => {
+    try {
+      const pharmacyId = urlParams.get("id");
+      const response = await fetch(
+        `http://localhost:8080/api/health/pharmacies/${pharmacyId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: nameInput.value,
+            willaya: willayaInput.value,
+            moughataa: moughataaInput.value,
+            latitude: parseFloat(latitudeInput.value),
+            longitude: parseFloat(longitudeInput.value),
+            isOpenTonight: isOpenTonightSelect.value === "true",
+          }),
+        }
+      );
+      if (response.ok) {
+        alert("Pharmacy updated successfully!");
+        window.location.href = "/pharmacy";
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to update pharmacy:", errorData);
+        alert(
+          "Failed to update pharmacy. Please try again.",
+          errorData.message
+        );
+      }
+    } catch (error) {
+      console.error("Error updating pharmacy:", error);
+      alert(
+        "An error occurred while updating pharmacy. Please try again later."
+      );
+    }
+  });
 });

@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <h3 class="text-sm font-bold text-gray-900">${
                       pharmacy.name
                     }</h3>
+                     <span class="text-sm font-semibold text-gray-900">${
+                       pharmacy.willaya
+                     }-${pharmacy.moughataa}</span>
                     <h3 class="text-sm font-bold ${
                       openTonight === "Open" ? "text-green-600" : "text-red-600"
                     }">${openTonight}</h3>
@@ -42,9 +45,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                     <div>
                       <a href="https://www.google.com/maps/dir/?api=1&destination=${
-                        pharmacy.longitude
+                        pharmacy.latitude
                       },${
-            pharmacy.latitude
+            pharmacy.longitude
           }" target="_blank" class="text-blue-400 hover:text-blue-600 underline transition-colors duration-300">voir map</a>
                     </div>
                   </div>
