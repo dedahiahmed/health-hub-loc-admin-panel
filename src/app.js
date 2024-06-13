@@ -22,7 +22,7 @@ app.use("/login", loginRoute);
 // Use the pharmacy route
 app.use("/pharmacy", pharmacyRoute);
 // Use the pharmacy route
-app.use("/cabinet", cabinetRoute); 
+app.use("/cabinet", cabinetRoute);
 
 // Route for "/" to redirect to "/pharmacy"
 app.get("/", (req, res) => {
