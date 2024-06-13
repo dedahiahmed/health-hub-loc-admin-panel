@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (response.ok) {
         const data = await response.text();
         alert(data);
-        window.location.href = "/doctors"; // Redirect to doctors page
+        window.location.href = "/doctor"; // Redirect to doctors page
       } else {
         const errorData = await response.json();
         console.error("Doctor creation failed:", errorData);
