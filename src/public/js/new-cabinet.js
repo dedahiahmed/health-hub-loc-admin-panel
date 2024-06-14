@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         const data = await response.text();
-        alert(data);
+        alert("cabinet add succefuly");
         window.location.href = "/cabinet";
       } else {
         const errorData = await response.json();

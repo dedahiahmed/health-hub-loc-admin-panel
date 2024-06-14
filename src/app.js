@@ -105,7 +105,6 @@ const checkToken = async (req, res, next) => {
       req.user = data;
       next();
     } else {
-      // If token is invalid, clear the cookie and redirect to login page
       res.clearCookie("token");
       res.redirect("/login");
     }
