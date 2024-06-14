@@ -1,33 +1,99 @@
 const express = require("express");
 const path = require("path");
 const ejs = require("ejs");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
-
 // Set the views directory
 app.set("views", path.join(__dirname, "views"));
-
 // Serve static files from the "public" directory
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+// Middleware to parse request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware to parse cookies
+app.use(cookieParser());
 
 const loginRoute = require("./routes/login");
 const pharmacyRoute = require("./routes/pharmacy");
 const doctorRoute = require("./routes/doctor");
-const cabinetRoute = require("./routes/cabinet"); // Require the cabinet routes
+const cabinetRoute = require("./routes/cabinet");
 
 // Use the login route
 app.use("/login", loginRoute);
 
-// Use the pharmacy route
-app.use("/pharmacy", pharmacyRoute);
-app.use("/doctor", doctorRoute);
-// Use the pharmacy route
-app.use("/cabinet", cabinetRoute);
+// POST route for handling login
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+  const payload = {
+    username: username,
+    password: password,
+  };
+
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const token = data.token;
+      res.cookie("token", token, { httpOnly: true });
+      res.json({ success: true });
+    } else {
+      const errorData = await response.json();
+      res.status(response.status).json(errorData);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+const checkToken = async (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    // If token is not found, redirect to login page
+    return res.redirect("/login");
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/user-me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      req.user = data;
+      next();
+    } else {
+      // If token is invalid, clear the cookie and redirect to login page
+      res.clearCookie("token");
+      res.redirect("/login");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+// Route for "/" to redirect to "/pharmacy"
+app.use("/pharmacy", checkToken, pharmacyRoute);
+app.use("/doctor", checkToken, doctorRoute);
+app.use("/cabinet", checkToken, cabinetRoute);
 
 // Route for "/" to redirect to "/pharmacy"
-app.get("/", (req, res) => {
+app.get("/", checkToken, (req, res) => {
   res.redirect("/pharmacy");
 });
 

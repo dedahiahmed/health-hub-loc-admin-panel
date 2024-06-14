@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         const data = await response.text();
-        alert(data);
+        alert("pharmacy added succefuly");
         window.location.href = "/pharmacy";
       } else {
         const errorData = await response.json();
