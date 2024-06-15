@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const moughataa = moughataaInput.value;
     const latitude = parseFloat(latitudeInput.value);
     const longitude = parseFloat(longitudeInput.value);
-    const isOpenTonight = isOpenTonightInput.value === "true";
+    const isOpenTonight = isOpenTonightInput.value === "true" ? true : false;
 
     if (
       !name ||

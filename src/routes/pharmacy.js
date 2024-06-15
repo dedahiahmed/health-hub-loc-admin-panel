@@ -30,4 +30,7 @@ router.get("/new-pharmacy", (req, res) => {
 router.get("/update-pharmacy", (req, res) => {
   res.render("update-pharmacy", { title: "Update Pharmacy" });
 });
+router.get("/garde", (req, res) => {
+  res.render("garde", { title: "Update Pharmacies" });
+});
 module.exports = router;

@@ -19,13 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
   moughataaInput.value = urlParams.get("moughataa") || "";
   latitudeInput.value = urlParams.get("latitude") || "";
   longitudeInput.value = urlParams.get("longitude") || "";
-  isOpenTonightSelect.value = urlParams.get("isOpenTonight") || "";
+  isOpenTonightSelect.value = urlParams.get("openTonight") || "";
 
   // Add event listener to the update button
   const updateButton = document.querySelector("#updateButton");
   updateButton.addEventListener("click", async () => {
     try {
       const pharmacyId = urlParams.get("id");
+      const isOpenTonight = isOpenTonightSelect.value === "true" ? true : false;
       const response = await fetch(
         `http://localhost:8080/api/health/pharmacies/${pharmacyId}`,
         {
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             moughataa: moughataaInput.value,
             latitude: parseFloat(latitudeInput.value),
             longitude: parseFloat(longitudeInput.value),
-            isOpenTonight: isOpenTonightSelect.value === "true",
+            isOpenTonight: isOpenTonight,
           }),
         }
       );
