@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Get references to the input fields
   const nameInput = document.querySelector('input[name="name"]');
-  const willayaInput = document.querySelector('input[name="willaya"]');
-  const moughataaInput = document.querySelector('input[name="moughataa"]');
+  const willayaInput = document.querySelector('select[name="willaya"]');
+  const moughataaInput = document.querySelector('select[name="moughataa"]');
   const latitudeInput = document.querySelector('input[name="latitude"]');
   const longitudeInput = document.querySelector('input[name="longitude"]');
   const isOpenTonightSelect = document.querySelector(

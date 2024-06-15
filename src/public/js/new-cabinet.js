@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cabinetForm = document.querySelector("form");
   const submitButton = cabinetForm.querySelector('button[type="button"]');
   const nomInput = cabinetForm.querySelector('input[name="nom"]');
-  const willayaInput = cabinetForm.querySelector('input[name="willaya"]');
-  const moughataaInput = cabinetForm.querySelector('input[name="moughataa"]');
+  const willayaInput = cabinetForm.querySelector('select[name="willaya"]');
+  const moughataaInput = cabinetForm.querySelector('select[name="moughataa"]');
   const latitudeInput = cabinetForm.querySelector('input[name="latitude"]');
   const longitudeInput = cabinetForm.querySelector('input[name="longitude"]');
 

@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.querySelector("form");
   const loginButton = loginForm.querySelector('button[type="button"]');
   const nameInput = loginForm.querySelector('input[name="name"]');
-  const willayaInput = loginForm.querySelector('input[name="willaya"]');
-  const moughataaInput = loginForm.querySelector('input[name="moughataa"]');
+  const willayaInput = loginForm.querySelector('select[name="willaya"]');
+  const moughataaInput = loginForm.querySelector('select[name="moughataa"]');
   const latitudeInput = loginForm.querySelector('input[name="latitude"]');
   const longitudeInput = loginForm.querySelector('input[name="longitude"]');
   const isOpenTonightInput = loginForm.querySelector(

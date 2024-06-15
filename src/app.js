@@ -92,7 +92,6 @@ const checkToken = async (req, res, next) => {
 
   try {
     const token = decryptToken(encryptedToken);
-    console.log("token", token);
     const response = await fetch("http://localhost:8080/api/auth/user-me", {
       method: "GET",
       headers: {
