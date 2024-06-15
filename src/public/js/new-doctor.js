@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const doctorForm = document.querySelector("form");
   const createButton = doctorForm.querySelector('button[type="submit"]');
   const nameInput = doctorForm.querySelector('input[name="name"]');
-  const specialityInput = doctorForm.querySelector('input[name="speciality"]');
+  const specialityInput = doctorForm.querySelector('select[name="speciality"]');
   const scheduleInputs = {
     Monday: doctorForm.querySelector('input[name="schedule[Monday]"]'),
     Tuesday: doctorForm.querySelector('input[name="schedule[Tuesday]"]'),

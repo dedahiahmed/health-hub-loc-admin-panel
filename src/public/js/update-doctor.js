@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Get references to the input fields
   const nameInput = document.querySelector('input[name="name"]');
-  const specialityInput = document.querySelector('input[name="speciality"]');
+  const specialityInput = document.querySelector('select[name="speciality"]');
   const cabinetSelect = document.querySelector('select[name="cabinet[id]"]');
   const mondayInput = document.querySelector('input[name="schedule[Monday]"]');
   const tuesdayInput = document.querySelector(

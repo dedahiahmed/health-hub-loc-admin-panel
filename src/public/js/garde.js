@@ -37,7 +37,7 @@ async function updatePharmacyStatus() {
     const response = await fetch(
       "http://localhost:8080/api/health/pharmacies/isOpenTonight",
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },

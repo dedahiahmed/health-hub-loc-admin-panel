@@ -52,13 +52,26 @@
                       </div>
                       <div class="flex flex-col">
                         <label class="leading-loose">Speciality</label>
-                        <input
+                        <select
                           required
-                          type="text"
+                          id="speciality"
                           name="speciality"
                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                          placeholder="Speciality"
-                        />
+                        >
+                          <option value="" disabled selected>
+                            Select Speciality
+                          </option>
+                          <option value="CARDIOLOGIE">Cardiologie</option>
+                          <option value="DERMATOLOGIE">Dermatologie</option>
+                          <option value="PEDIATRIE">Pédiatrie</option>
+                          <option value="GYNECOLOGIE">Gynécologie</option>
+                          <option value="NEUROLOGIE">Neurologie</option>
+                          <option value="ONCOLOGIE">Oncologie</option>
+                          <option value="ORTHOPEDIE">Orthopédie</option>
+                          <option value="OPHTALMOLOGIE">Ophtalmologie</option>
+                          <option value="RADIOLOGIE">Radiologie</option>
+                          <option value="UROLOGIE">Urologie</option>
+                        </select>
                       </div>
                       <div class="flex flex-col">
                         <label class="leading-loose">Schedule</label>
