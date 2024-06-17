@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (response.ok) {
       const doctors = await response.json();
       const doctorContainer = document.getElementById("doctorContainer");
-      const itemsPerPage = 8;
+      const itemsPerPage = 3;
       let currentPage = 1;
 
       // Fetch cabinet details for each doctor
